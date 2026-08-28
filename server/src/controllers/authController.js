@@ -29,8 +29,8 @@ async function login(req, res) {
 
     res.cookie('adminToken', token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: process.env.NODE_ENV === 'production' ? 'strict' : 'lax',
+      secure: true, // required for sameSite: 'none'
+      sameSite: 'none', // required for cross-origin (Vercel to Render)
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
 
