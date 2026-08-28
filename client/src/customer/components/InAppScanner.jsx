@@ -28,8 +28,11 @@ export default function InAppScanner({ onResult, onClose }) {
           aspectRatio: undefined, // Let the browser decide — avoids split video bug
           disableFlip: false,
         },
-        (decodedText) => {
-          qr.stop().catch(() => {});
+        async (decodedText) => {
+          if (html5QrRef.current) {
+            try { await html5QrRef.current.stop(); } catch (err) {}
+            html5QrRef.current = null;
+          }
           onResult(decodedText);
         },
         () => {} // ignore per-frame failures
