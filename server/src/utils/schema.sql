@@ -73,3 +73,11 @@ CREATE TABLE IF NOT EXISTS settings (
 INSERT IGNORE INTO settings (key_name, value) VALUES ('tax_percent', '0');
 INSERT IGNORE INTO settings (key_name, value) VALUES ('currency_symbol', '₹');
 INSERT IGNORE INTO settings (key_name, value) VALUES ('store_name', 'BillQR Store');
+
+-- Performance Indexes
+CREATE INDEX idx_orders_created_at ON orders(created_at);
+CREATE INDEX idx_orders_payment_status ON orders(payment_status);
+CREATE INDEX idx_order_items_order_id ON order_items(order_id);
+CREATE INDEX idx_products_category_id ON products(category_id);
+CREATE INDEX idx_products_brand_id ON products(brand_id);
+CREATE INDEX idx_products_stock_qty ON products(stock_qty);

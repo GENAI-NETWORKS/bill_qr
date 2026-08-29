@@ -141,28 +141,13 @@ export default function Invoice() {
           {/* Footer */}
           <div style={{ textAlign: 'center', fontSize: 12 }}>
             <p style={{ margin: '0 0 12px', fontWeight: 700 }}>Thank you for your purchase!</p>
-            
-            <div style={{ display: 'flex', justifyContent: 'center', margin: '16px 0' }}>
-              <QRCodeSVG 
-                value={`${window.location.origin}/invoice/${order.id}`} 
-                size={80} 
-                fgColor="#1e293b" 
-                level="M" 
-                marginSize={0}
-              />
-            </div>
-            <p style={{ margin: '0 0 12px', fontSize: 10, color: '#64748b' }}>Scan to Verify</p>
 
             <p style={{ margin: 0, fontSize: 10, color: '#666' }}>Powered by Gen-AI Tech</p>
             <p style={{ margin: '4px 0 0', fontSize: 10, color: '#666' }}>IT Solutions Salem</p>
           </div>
         </div>
         
-        <div style={{ marginTop: 24 }}>
-          <button onClick={() => navigate('/cart')} style={{ background: 'none', border: 'none', color: '#64748b', fontWeight: 600, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, fontSize: 14 }}>
-            <ArrowLeft size={16} /> Back to Scanner
-          </button>
-        </div>
+
       </div>
     );
   }
@@ -200,19 +185,7 @@ export default function Invoice() {
           </button>
         </div>
 
-        {/* QR Code */}
-        <div style={{ margin: '20px 12px', padding: '20px', background: 'white', borderRadius: 12, boxShadow: '0 1px 6px rgba(0,0,0,0.06)', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <p style={{ margin: '0 0 16px', fontSize: 13, fontWeight: 600, color: '#1e293b', textAlign: 'center' }}>Scan for Physical Invoice for Item Purchase Checklist</p>
-          <div style={{ padding: 12, background: 'linear-gradient(135deg, rgba(79,70,229,0.05), rgba(6,182,212,0.05))', borderRadius: 16 }}>
-            <QRCodeSVG 
-              value={`${window.location.origin}/invoice/${order_id}?view=full`} 
-              size={130} 
-              fgColor="#1e293b" 
-              level="M" 
-              marginSize={0}
-            />
-          </div>
-        </div>
+
       </div>
     </CustomerShell>
   );
