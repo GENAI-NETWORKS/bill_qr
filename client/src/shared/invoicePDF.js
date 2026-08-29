@@ -8,8 +8,8 @@ import QRCode from 'qrcode';
  */
 export async function generateInvoicePDF(order) {
   // A standard thermal receipt width is 80mm.
-  // Estimate height: base 170 (increased for QR) + ~10mm per item
-  const baseHeight = 170;
+  // Estimate height: base 130 + ~10mm per item
+  const baseHeight = 130;
   const itemHeight = 12;
   const totalHeight = baseHeight + (order.items.length * itemHeight);
   
@@ -153,22 +153,7 @@ export async function generateInvoicePDF(order) {
   y += 8;
   doc.text('Thank you for your purchase!', pageWidth / 2, y, { align: 'center' });
   
-  // --- QR Code Injection ---
-  try {
-    const invoiceUrl = `${window.location.origin}/invoice/${order.id}`;
-    const qrDataUrl = await QRCode.toDataURL(invoiceUrl, {
-      margin: 1,
-      width: 120,
-      color: { dark: '#1e293b', light: '#ffffff' }
-    });
-    y += 4;
-    doc.addImage(qrDataUrl, 'PNG', (pageWidth / 2) - 15, y, 30, 30);
-    y += 34;
-    doc.setFontSize(7);
-    doc.text('Scan to Verify', pageWidth / 2, y, { align: 'center' });
-  } catch (err) {
-    console.error('QR generation failed', err);
-  }
+
   
   y += 8;
   doc.setFontSize(7);
