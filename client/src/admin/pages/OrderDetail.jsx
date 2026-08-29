@@ -31,25 +31,27 @@ export default function OrderDetail() {
 
   return (
     <div className="max-w-3xl mx-auto">
-      <div className="flex items-center gap-3 mb-6">
-        <button onClick={() => navigate('/admin/orders')} className="btn-secondary p-2">
+      <div className="flex flex-wrap items-center gap-3 mb-6">
+        <button onClick={() => navigate('/admin/orders')} className="btn-secondary p-2 flex-shrink-0">
           <ArrowLeft size={16} />
         </button>
-        <div className="flex-1">
-          <h1 className="text-xl font-bold text-white" style={{ fontFamily: 'Outfit, sans-serif' }}>
+        <div className="flex-1 min-w-[200px]">
+          <h1 className="text-xl font-bold text-white break-words" style={{ fontFamily: 'Outfit, sans-serif' }}>
             {order.order_number}
           </h1>
           <p className="text-sm" style={{ color: '#64748b' }}>
             {format(new Date(order.created_at), 'MMMM d, yyyy h:mm a')}
           </p>
         </div>
-        <span className={`badge ${order.payment_status === 'paid' ? 'badge-success' : order.payment_status === 'failed' ? 'badge-danger' : 'badge-warning'}`}
-          style={{ fontSize: '0.8rem', padding: '0.35rem 0.8rem' }}>
-          {order.payment_status}
-        </span>
-        <button onClick={() => generateInvoicePDF(order)} className="btn-primary">
-          <Download size={16} /> PDF
-        </button>
+        <div className="flex items-center gap-3 w-full sm:w-auto justify-end sm:ml-auto mt-2 sm:mt-0">
+          <span className={`badge ${order.payment_status === 'paid' ? 'badge-success' : order.payment_status === 'failed' ? 'badge-danger' : 'badge-warning'}`}
+            style={{ fontSize: '0.8rem', padding: '0.35rem 0.8rem' }}>
+            {order.payment_status}
+          </span>
+          <button onClick={() => generateInvoicePDF(order)} className="btn-primary flex-shrink-0">
+            <Download size={16} /> PDF
+          </button>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-5">
@@ -77,40 +79,42 @@ export default function OrderDetail() {
         <div className="px-5 py-3" style={{ borderBottom: '1px solid #2a2d45' }}>
           <h3 className="font-semibold text-white">Order Items ({order.items.length})</h3>
         </div>
-        <table className="admin-table">
-          <thead>
-            <tr>
-              <th>Product</th>
-              <th>Unit Price</th>
-              <th>Qty</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            {order.items.map(item => (
-              <tr key={item.id}>
-                <td>
-                  <div className="flex items-center gap-3">
-                    {item.image_url ? (
-                      <img src={item.image_url} alt={item.product_name}
-                        className="w-9 h-9 rounded-lg object-cover flex-shrink-0"
-                        style={{ border: '1px solid #2a2d45' }}
-                        onError={e => { e.target.style.display = 'none'; }} />
-                    ) : (
-                      <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: '#1c1f31' }}>
-                        <Package size={14} style={{ color: '#64748b' }} />
-                      </div>
-                    )}
-                    <span className="font-medium text-white text-sm">{item.product_name}</span>
-                  </div>
-                </td>
-                <td style={{ color: '#94a3b8' }}>₹{parseFloat(item.unit_price).toLocaleString('en-IN', { minimumFractionDigits: 2 })}</td>
-                <td style={{ color: '#94a3b8' }}>{item.quantity}</td>
-                <td className="font-semibold text-white">₹{parseFloat(item.line_total).toLocaleString('en-IN', { minimumFractionDigits: 2 })}</td>
+        <div className="overflow-x-auto">
+          <table className="admin-table">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Unit Price</th>
+                <th>Qty</th>
+                <th>Total</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {order.items.map(item => (
+                <tr key={item.id}>
+                  <td>
+                    <div className="flex items-center gap-3">
+                      {item.image_url ? (
+                        <img src={item.image_url} alt={item.product_name}
+                          className="w-9 h-9 rounded-lg object-cover flex-shrink-0"
+                          style={{ border: '1px solid #2a2d45' }}
+                          onError={e => { e.target.style.display = 'none'; }} />
+                      ) : (
+                        <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: '#1c1f31' }}>
+                          <Package size={14} style={{ color: '#64748b' }} />
+                        </div>
+                      )}
+                      <span className="font-medium text-white text-sm">{item.product_name}</span>
+                    </div>
+                  </td>
+                  <td style={{ color: '#94a3b8' }}>₹{parseFloat(item.unit_price).toLocaleString('en-IN', { minimumFractionDigits: 2 })}</td>
+                  <td style={{ color: '#94a3b8' }}>{item.quantity}</td>
+                  <td className="font-semibold text-white">₹{parseFloat(item.line_total).toLocaleString('en-IN', { minimumFractionDigits: 2 })}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
