@@ -79,7 +79,7 @@ export default function AdminLayout() {
             <button
               onClick={logout}
               title="Logout"
-              className="p-1.5 rounded-lg transition-colors"
+              className={`p-1.5 rounded-lg transition-colors ${!sidebarOpen ? 'md:hidden' : ''}`}
               style={{ color: '#64748b', background: 'none', border: 'none', cursor: 'pointer' }}
               onMouseEnter={e => e.currentTarget.style.color = '#ef4444'}
               onMouseLeave={e => e.currentTarget.style.color = '#64748b'}>

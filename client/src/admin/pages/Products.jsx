@@ -80,7 +80,7 @@ export default function Products() {
             value={search}
             onChange={e => setSearch(e.target.value)}
             placeholder="Search products..."
-            className="form-input pl-9"
+            className="form-input !pl-9"
           />
         </div>
 

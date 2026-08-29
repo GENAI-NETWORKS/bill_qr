@@ -193,16 +193,16 @@ export default function Invoice() {
         </div>
 
         {/* Action Buttons */}
-        <div style={{ padding: '8px 12px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+        <div style={{ padding: '8px 12px', display: 'flex', flexDirection: 'column', gap: 8, alignItems: 'center' }}>
           <button id="downloadInvoiceBtn" onClick={() => generateInvoicePDF(order)}
-            style={{ width: '100%', padding: '11px', borderRadius: 12, border: '2px solid #4f46e5', background: 'white', color: '#4f46e5', fontWeight: 600, fontSize: 14, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
+            style={{ width: 'fit-content', padding: '11px 24px', borderRadius: 12, border: '2px solid #4f46e5', background: 'white', color: '#4f46e5', fontWeight: 600, fontSize: 14, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
             <Download size={16} /> Download Invoice PDF
           </button>
         </div>
 
         {/* QR Code */}
         <div style={{ margin: '20px 12px', padding: '20px', background: 'white', borderRadius: 12, boxShadow: '0 1px 6px rgba(0,0,0,0.06)', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <p style={{ margin: '0 0 16px', fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Scan for Softcopy Invoice</p>
+          <p style={{ margin: '0 0 16px', fontSize: 13, fontWeight: 600, color: '#1e293b', textAlign: 'center' }}>Scan for Physical Invoice for Item Purchase Checklist</p>
           <div style={{ padding: 12, background: 'linear-gradient(135deg, rgba(79,70,229,0.05), rgba(6,182,212,0.05))', borderRadius: 16 }}>
             <QRCodeSVG 
               value={`${window.location.origin}/invoice/${order_id}?view=full`} 

@@ -27,7 +27,7 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center relative overflow-hidden"
+    <div className="h-[100dvh] w-full fixed inset-0 flex flex-col items-center justify-center overflow-hidden"
       style={{ background: 'linear-gradient(135deg, #0d0f1a 0%, #141622 50%, #1a1040 100%)' }}>
 
       {/* Background orbs */}
@@ -36,7 +36,7 @@ export default function Login() {
       <div className="absolute bottom-1/4 right-1/4 w-64 h-64 rounded-full opacity-10 blur-3xl"
         style={{ background: 'radial-gradient(circle, #4ade80, transparent)' }} />
 
-      <div className="w-full max-w-md mx-4 z-10">
+      <div className="w-full max-w-md px-6 z-10">
         {/* Logo */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-4 gradient-primary shadow-lg">

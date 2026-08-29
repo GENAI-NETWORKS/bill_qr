@@ -4,10 +4,20 @@ import { persist } from 'zustand/middleware';
 const SESSION_KEY = 'billqr_cart_session';
 
 // Generate or retrieve session ID
+function generateUUID() {
+  if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+    return crypto.randomUUID();
+  }
+  // Fallback for insecure contexts (HTTP)
+  return 'xxxx-xxxx-xxxx-xxxx'.replace(/[x]/g, () => {
+    return (Math.random() * 16 | 0).toString(16);
+  });
+}
+
 function getSessionId() {
   let id = localStorage.getItem(SESSION_KEY);
   if (!id) {
-    id = crypto.randomUUID();
+    id = generateUUID();
     localStorage.setItem(SESSION_KEY, id);
   }
   return id;
@@ -70,7 +80,7 @@ export const useCartStore = create(
 
       clearCart: () => {
         // Regenerate session for next purchase
-        const newSession = crypto.randomUUID();
+        const newSession = generateUUID();
         localStorage.setItem(SESSION_KEY, newSession);
         set({ items: [], sessionId: newSession });
       },

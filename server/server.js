@@ -17,11 +17,17 @@ dirs.forEach(d => { if (!fs.existsSync(d)) fs.mkdirSync(d, { recursive: true });
 
 // Middleware
 app.use(cors({
-  origin: [
-    'http://localhost:5173',
-    'http://localhost:3000',
-    process.env.BASE_URL,
-  ].filter(Boolean),
+  origin: function (origin, callback) {
+    if (!origin || origin.startsWith('http://localhost') || origin.startsWith('http://192.168.') || origin.startsWith('http://10.') || origin.startsWith('http://172.')) {
+      callback(null, true);
+    } else {
+      callback(null, [
+        'http://localhost:5173',
+        'http://localhost:3000',
+        process.env.BASE_URL,
+      ].filter(Boolean));
+    }
+  },
   credentials: true,
 }));
 app.use(express.json());

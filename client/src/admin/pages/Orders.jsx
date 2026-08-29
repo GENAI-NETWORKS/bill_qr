@@ -58,17 +58,51 @@ export default function Orders() {
           <option value="failed">Failed</option>
         </select>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 flex-1 min-w-[140px]">
           <label className="text-xs" style={{ color: '#64748b' }}>From</label>
-          <input type="date" value={filters.from} onChange={e => setFilters(f => ({ ...f, from: e.target.value }))}
-            className="form-input w-36" />
+          <input 
+            type="text" 
+            placeholder="Select date"
+            onFocus={(e) => {
+              e.target.type = "date";
+              if (typeof e.target.showPicker === 'function') {
+                setTimeout(() => { try { e.target.showPicker(); } catch(err) {} }, 50);
+              }
+            }}
+            onClick={(e) => {
+              if (e.target.type === "date" && typeof e.target.showPicker === 'function') {
+                try { e.target.showPicker(); } catch(err) {}
+              }
+            }}
+            onBlur={(e) => { if (!e.target.value) e.target.type = "text"; }}
+            value={filters.from} 
+            onChange={e => setFilters(f => ({ ...f, from: e.target.value }))}
+            className="form-input w-full cursor-pointer" style={{ minHeight: '42px' }} 
+          />
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 flex-1 min-w-[140px]">
           <label className="text-xs" style={{ color: '#64748b' }}>To</label>
-          <input type="date" value={filters.to} onChange={e => setFilters(f => ({ ...f, to: e.target.value }))}
-            className="form-input w-36" />
+          <input 
+            type="text" 
+            placeholder="Select date"
+            onFocus={(e) => {
+              e.target.type = "date";
+              if (typeof e.target.showPicker === 'function') {
+                setTimeout(() => { try { e.target.showPicker(); } catch(err) {} }, 50);
+              }
+            }}
+            onClick={(e) => {
+              if (e.target.type === "date" && typeof e.target.showPicker === 'function') {
+                try { e.target.showPicker(); } catch(err) {}
+              }
+            }}
+            onBlur={(e) => { if (!e.target.value) e.target.type = "text"; }}
+            value={filters.to} 
+            onChange={e => setFilters(f => ({ ...f, to: e.target.value }))}
+            className="form-input w-full cursor-pointer" style={{ minHeight: '42px' }} 
+          />
         </div>
-        <button onClick={() => { setFilters({ status: '', from: '', to: '' }); setPage(1); }} className="btn-secondary">
+        <button onClick={() => { setFilters({ status: '', from: '', to: '' }); setPage(1); }} className="btn-secondary w-full sm:w-auto">
           Clear
         </button>
       </div>

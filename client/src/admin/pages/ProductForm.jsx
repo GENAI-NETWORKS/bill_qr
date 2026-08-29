@@ -245,16 +245,16 @@ export default function ProductForm() {
           {/* Image */}
           <div>
             <label className="form-label">Product Image</label>
-            <div className="flex gap-2 mb-3">
+            <div className="flex flex-wrap gap-2 mb-3">
               <button type="button"
                 onClick={() => setImageMode('url')}
-                className={`btn-secondary flex-1 justify-center ${imageMode === 'url' ? 'border-purple-500' : ''}`}
+                className={`btn-secondary justify-center py-2 px-4 text-xs sm:text-sm whitespace-nowrap ${imageMode === 'url' ? 'border-purple-500' : ''}`}
                 style={imageMode === 'url' ? { borderColor: '#6c63ff', color: '#6c63ff' } : {}}>
                 <Link2 size={15} /> Paste URL
               </button>
               <button type="button"
                 onClick={() => setImageMode('upload')}
-                className={`btn-secondary flex-1 justify-center ${imageMode === 'upload' ? 'border-purple-500' : ''}`}
+                className={`btn-secondary justify-center py-2 px-4 text-xs sm:text-sm whitespace-nowrap ${imageMode === 'upload' ? 'border-purple-500' : ''}`}
                 style={imageMode === 'upload' ? { borderColor: '#6c63ff', color: '#6c63ff' } : {}}>
                 <Upload size={15} /> Upload File
               </button>
@@ -373,8 +373,8 @@ export default function ProductForm() {
           </div>
 
           {/* Submit */}
-          <div className="flex gap-3 pt-2">
-            <button type="submit" disabled={saving} id="saveProduct" className="btn-primary flex-1 justify-center py-3">
+          <div className="flex flex-wrap gap-3 pt-2">
+            <button type="submit" disabled={saving} id="saveProduct" className="btn-primary justify-center py-2 px-4 text-sm sm:text-base whitespace-nowrap">
               {saving ? (
                 <span className="flex items-center gap-2">
                   <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin-custom" />
@@ -382,7 +382,7 @@ export default function ProductForm() {
                 </span>
               ) : isEdit ? 'Update Product' : 'Save & Generate QR'}
             </button>
-            <button type="button" onClick={() => navigate('/admin/products')} className="btn-secondary px-6">
+            <button type="button" onClick={() => navigate('/admin/products')} className="btn-secondary py-2 px-4 sm:px-6 text-sm sm:text-base">
               Cancel
             </button>
           </div>

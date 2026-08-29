@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../../shared/api';
 import {
-  Package, TrendingUp, ShoppingCart, DollarSign,
+  Package, TrendingUp, ShoppingCart, IndianRupee,
   AlertTriangle, RefreshCw, ArrowRight
 } from 'lucide-react';
 import {
@@ -85,7 +85,7 @@ export default function Dashboard() {
       {/* Stat Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         <StatCard icon={Package} label="Total Products" value={data?.total_products || 0} color="#6c63ff" />
-        <StatCard icon={DollarSign} label="Stock Value" value={`₹${parseFloat(data?.stock_value || 0).toLocaleString('en-IN')}`} color="#4ade80" />
+        <StatCard icon={IndianRupee} label="Stock Value" value={`₹${parseFloat(data?.stock_value || 0).toLocaleString('en-IN')}`} color="#4ade80" />
         <StatCard icon={TrendingUp} label="Total Revenue" value={`₹${parseFloat(data?.total_revenue || 0).toLocaleString('en-IN')}`}
           sub={`Today: ₹${parseFloat(data?.orders?.today?.revenue || 0).toLocaleString('en-IN')}`} color="#f59e0b" />
         <StatCard icon={ShoppingCart} label="Orders (All)" value={data?.orders?.all?.count || 0}
@@ -96,7 +96,7 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
         {/* Bar chart */}
         <div className="lg:col-span-2 rounded-2xl p-5" style={{ background: '#141622', border: '1px solid #2a2d45' }}>
-          <h3 className="font-semibold text-white mb-4">Orders — Last 7 Days</h3>
+          <h3 className="font-semibold text-white mb-4">Orders: Last 7 Days</h3>
           {weekData.length > 0 ? (
             <ResponsiveContainer width="100%" height={200}>
               <BarChart data={weekData} barSize={28}>

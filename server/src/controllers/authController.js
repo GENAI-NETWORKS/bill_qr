@@ -27,10 +27,11 @@ async function login(req, res) {
       { expiresIn: '7d' }
     );
 
+    const isProd = process.env.NODE_ENV === 'production';
     res.cookie('adminToken', token, {
       httpOnly: true,
-      secure: true, // required for sameSite: 'none'
-      sameSite: 'none', // required for cross-origin (Vercel to Render)
+      secure: isProd, // required for sameSite: 'none', but false for local HTTP dev
+      sameSite: isProd ? 'none' : 'lax', // required for cross-origin (Vercel to Render)
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
 
