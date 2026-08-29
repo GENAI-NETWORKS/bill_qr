@@ -185,7 +185,19 @@ export default function Invoice() {
           </button>
         </div>
 
-
+        {/* QR Code */}
+        <div style={{ margin: '20px 12px', padding: '20px', background: 'white', borderRadius: 12, boxShadow: '0 1px 6px rgba(0,0,0,0.06)', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <p style={{ margin: '0 0 16px', fontSize: 13, fontWeight: 600, color: '#1e293b', textAlign: 'center' }}>Scan for Physical Invoice for Item Purchase Checklist</p>
+          <div style={{ padding: 12, background: 'linear-gradient(135deg, rgba(79,70,229,0.05), rgba(6,182,212,0.05))', borderRadius: 16 }}>
+            <QRCodeSVG 
+              value={`${window.location.origin}/invoice/${order_id}?view=full`} 
+              size={130} 
+              fgColor="#1e293b" 
+              level="M" 
+              marginSize={0}
+            />
+          </div>
+        </div>
       </div>
     </CustomerShell>
   );
